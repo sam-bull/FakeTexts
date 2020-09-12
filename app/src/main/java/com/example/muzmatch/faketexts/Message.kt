@@ -1,8 +1,9 @@
 package com.example.muzmatch.faketexts
 
 import android.view.Gravity
+import java.util.*
 
-data class Message(val message: String, val type: MessageType) {
+data class Message(val message: String, val type: MessageType, val timestamp: Calendar) {
 
     fun getBackground() = when(type) {
         MessageType.SENT -> R.drawable.pink_rounded_rectangle
