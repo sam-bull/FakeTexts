@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SentMessage" parent="TextAppearance.AppCompat.Body1">
+        <item name="background">@color/pink</item>
+    </style>
+
+    <style name="ReceivedMessage" parent="TextAppearance.AppCompat.Body1">
+        <item name="background">@color/lightGrey</item>
+    </style>
+
 </resources>
