@@ -36,7 +36,7 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         messages_recycler_view.layoutManager = LinearLayoutManager(context)
-        messages_recycler_view.adapter = MessagesAdaptor(viewModel.messages)
+        messages_recycler_view.adapter = context?.let { MessagesAdaptor(viewModel.messages, it) }
 
         viewModel.sendMessage.observe(viewLifecycleOwner, Observer { event ->
             event.getContentIfNotHandled()?.let {

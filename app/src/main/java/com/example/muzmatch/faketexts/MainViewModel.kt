@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    val messages = mutableListOf<String>()
+    val messages = mutableListOf<Message>()
 
     private val _sendMessage = MutableLiveData<Event<String>>()
     val sendMessage: LiveData<Event<String>> = _sendMessage
@@ -16,7 +16,14 @@ class MainViewModel : ViewModel() {
     }
 
     fun sendMessage(text: String) {
-        messages.add(text)
+        messages.add(Message(text, MessageType.SENT))
+        if (text.contains("hello")) {
+            receiveMessage("hi")
+        }
+    }
+
+    fun receiveMessage(text: String) {
+        messages.add(Message(text, MessageType.RECEIVED))
     }
 }
 

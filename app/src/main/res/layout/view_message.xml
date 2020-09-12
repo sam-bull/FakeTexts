@@ -5,10 +5,26 @@
         <variable
             name="text"
             type="String" />
+        <variable
+            name="background"
+            type="android.graphics.drawable.Drawable" />
+        <variable
+            name="gravity"
+            type="Integer" />
     </data>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{text}" />
+        android:orientation="vertical"
+        android:gravity="@{gravity}">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{text}"
+            android:background="@{background}"
+            android:padding="8dp"/>
+
+    </LinearLayout>
 </layout>
