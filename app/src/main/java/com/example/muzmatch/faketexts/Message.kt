@@ -5,7 +5,7 @@ import java.util.*
 data class Message(
     val message: String,
     val type: MessageType,
-    val timestamp: Calendar,
+    val timeSent: Calendar,
     var hasTail: Boolean = false
 )
 

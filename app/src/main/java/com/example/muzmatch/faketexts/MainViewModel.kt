@@ -3,7 +3,6 @@ package com.example.muzmatch.faketexts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 class MainViewModel : ViewModel() {
@@ -22,8 +21,7 @@ class MainViewModel : ViewModel() {
         _sendMessage.postValue(Event(""))
     }
 
-    fun sendMessage(text: String) {
-        val now = Calendar.getInstance()
+    fun sendMessage(text: String, now: Calendar = Calendar.getInstance()) {
         if (messages.isEmpty()) {
             messages.add(
                 Message(
@@ -33,7 +31,7 @@ class MainViewModel : ViewModel() {
                 )
             )
         }
-        if (now.timeInMillis - messages.last().timestamp.timeInMillis > SECTION_TIME) {
+        if (now.timeInMillis - messages.last().timeSent.timeInMillis > SECTION_TIME) {
             messages.add(
                 Message(
                     "Today, ${now.get(Calendar.HOUR_OF_DAY)}:${now.get(Calendar.MINUTE)}",
@@ -42,24 +40,25 @@ class MainViewModel : ViewModel() {
                 )
             )
         }
-        checkTail(MessageType.SENT)
+        checkTail(MessageType.SENT, now)
         messages.add(Message(text, MessageType.SENT, now, true))
         if (text.contains("hello")) {
-            receiveMessage("hi")
+            receiveMessage("hi", now)
         }
         if (text.contains("how's it going")) {
-            receiveMessage("I'm good")
-            receiveMessage("you?")
+            receiveMessage("I'm good", now)
+            receiveMessage("you?", now)
         }
     }
 
-    private fun receiveMessage(text: String) {
-        checkTail(MessageType.RECEIVED)
-        messages.add(Message(text, MessageType.RECEIVED, Calendar.getInstance(), true))
+    private fun receiveMessage(text: String, now: Calendar) {
+        checkTail(MessageType.RECEIVED, now)
+        messages.add(Message(text, MessageType.RECEIVED, now, true))
     }
 
-    private fun checkTail(type: MessageType) {
-        if (messages.last().type == type && Calendar.getInstance().timeInMillis - messages.last().timestamp.timeInMillis < TAIL_TIME) {
+    private fun checkTail(type: MessageType, now: Calendar) {
+        if (messages.last().type == type &&
+            (now.timeInMillis - messages.last().timeSent.timeInMillis) <= TAIL_TIME) {
             messages.last().hasTail = false
         }
     }
