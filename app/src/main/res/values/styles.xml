@@ -1,19 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="SentMessage" parent="TextAppearance.AppCompat.Body1">
-        <item name="background">@color/pink</item>
-    </style>
-
-    <style name="ReceivedMessage" parent="TextAppearance.AppCompat.Body1">
-        <item name="background">@color/lightGrey</item>
     </style>
 
 </resources>

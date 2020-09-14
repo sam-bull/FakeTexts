@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="message_padding_0">0dp</dimen>
+    <dimen name="message_padding_8">8dp</dimen>
+    <dimen name="message_padding_12">12dp</dimen>
+    <dimen name="message_padding_20">20dp</dimen>
+</resources>

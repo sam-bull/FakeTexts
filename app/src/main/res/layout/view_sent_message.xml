@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="text"
+            type="String" />
+
+        <variable
+            name="hasTail"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:paddingEnd="@{hasTail ? @dimen/message_padding_0 : @dimen/message_padding_8}">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{hasTail ? @drawable/pink_rect_right_tail : @drawable/pink_rounded_rectangle}"
+            android:maxWidth="256dp"
+            android:padding="8dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="@{hasTail ? @dimen/message_padding_20 : @dimen/message_padding_12}"
+            android:text="@{text}"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</layout>

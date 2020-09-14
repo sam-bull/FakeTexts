@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Fake Texts</string>
+    <string name="enter_your_message">Enter your message here…</string>
 </resources>

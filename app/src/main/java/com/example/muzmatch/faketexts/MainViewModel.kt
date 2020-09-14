@@ -3,12 +3,14 @@ package com.example.muzmatch.faketexts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainViewModel : ViewModel() {
 
     companion object {
         private const val SECTION_TIME = 3600000
+        private const val TAIL_TIME = 20000
     }
 
     val messages = mutableListOf<Message>()
@@ -40,14 +42,26 @@ class MainViewModel : ViewModel() {
                 )
             )
         }
-        messages.add(Message(text, MessageType.SENT, now))
+        checkTail(MessageType.SENT)
+        messages.add(Message(text, MessageType.SENT, now, true))
         if (text.contains("hello")) {
             receiveMessage("hi")
         }
+        if (text.contains("how's it going")) {
+            receiveMessage("I'm good")
+            receiveMessage("you?")
+        }
     }
 
-    fun receiveMessage(text: String) {
-        messages.add(Message(text, MessageType.RECEIVED, Calendar.getInstance()))
+    private fun receiveMessage(text: String) {
+        checkTail(MessageType.RECEIVED)
+        messages.add(Message(text, MessageType.RECEIVED, Calendar.getInstance(), true))
+    }
+
+    private fun checkTail(type: MessageType) {
+        if (messages.last().type == type && Calendar.getInstance().timeInMillis - messages.last().timestamp.timeInMillis < TAIL_TIME) {
+            messages.last().hasTail = false
+        }
     }
 }
 
