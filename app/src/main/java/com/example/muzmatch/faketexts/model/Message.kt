@@ -1,4 +1,4 @@
-package com.example.muzmatch.faketexts
+package com.example.muzmatch.faketexts.model
 
 import java.util.*
 

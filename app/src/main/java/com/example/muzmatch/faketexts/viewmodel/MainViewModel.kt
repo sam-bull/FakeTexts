@@ -1,8 +1,10 @@
-package com.example.muzmatch.faketexts
+package com.example.muzmatch.faketexts.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.muzmatch.faketexts.model.Message
+import com.example.muzmatch.faketexts.model.MessageType
 import java.util.*
 
 class MainViewModel : ViewModel() {
@@ -41,7 +43,14 @@ class MainViewModel : ViewModel() {
             )
         }
         checkTail(MessageType.SENT, now)
-        messages.add(Message(text, MessageType.SENT, now, true))
+        messages.add(
+            Message(
+                text,
+                MessageType.SENT,
+                now,
+                true
+            )
+        )
         if (text.contains("hello")) {
             receiveMessage("hi", now)
         }
@@ -53,12 +62,20 @@ class MainViewModel : ViewModel() {
 
     private fun receiveMessage(text: String, now: Calendar) {
         checkTail(MessageType.RECEIVED, now)
-        messages.add(Message(text, MessageType.RECEIVED, now, true))
+        messages.add(
+            Message(
+                text,
+                MessageType.RECEIVED,
+                now,
+                true
+            )
+        )
     }
 
     private fun checkTail(type: MessageType, now: Calendar) {
         if (messages.last().type == type &&
-            (now.timeInMillis - messages.last().timeSent.timeInMillis) <= TAIL_TIME) {
+            (now.timeInMillis - messages.last().timeSent.timeInMillis) <= TAIL_TIME
+        ) {
             messages.last().hasTail = false
         }
     }

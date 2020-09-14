@@ -2,6 +2,7 @@ package com.example.muzmatch.faketexts
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.muzmatch.faketexts.view.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,7 +1,9 @@
-package com.example.muzmatch.faketexts
+package com.example.muzmatch.faketexts.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.example.muzmatch.faketexts.model.Message
+import com.example.muzmatch.faketexts.model.MessageType
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -18,7 +20,8 @@ class MainViewModelTest {
     companion object {
         private val TEST_TIME_IN_MILLIS = 1580551200750
         private val TEST_TIME = Calendar.getInstance().apply {
-            timeInMillis = TEST_TIME_IN_MILLIS
+            timeInMillis =
+                TEST_TIME_IN_MILLIS
         }
         private val TWO_SECONDS_AGO = Calendar.getInstance().apply {
             timeInMillis = TEST_TIME_IN_MILLIS - 2000
@@ -74,10 +77,25 @@ class MainViewModelTest {
 
     @Test
     fun sendMessage_secondMessage() {
-        viewModel.messages.add(Message("Timestamp", MessageType.TIMESTAMP, TWO_SECONDS_AGO))
-        viewModel.messages.add(Message("message", MessageType.SENT, TWO_SECONDS_AGO, true))
+        viewModel.messages.add(
+            Message(
+                "Timestamp",
+                MessageType.TIMESTAMP,
+                TWO_SECONDS_AGO
+            )
+        )
+        viewModel.messages.add(
+            Message(
+                "message",
+                MessageType.SENT,
+                TWO_SECONDS_AGO,
+                true
+            )
+        )
 
-        viewModel.sendMessage("message", TEST_TIME)
+        viewModel.sendMessage("message",
+            TEST_TIME
+        )
 
         assertEquals(viewModel.messages.size, 3)
         assertTrue(viewModel.messages.last().hasTail)
@@ -85,10 +103,25 @@ class MainViewModelTest {
 
     @Test
     fun sendMessage_onTailDelay() {
-        viewModel.messages.add(Message("Timestamp", MessageType.TIMESTAMP, TWENTY_SECONDS_AGO))
-        viewModel.messages.add(Message("message", MessageType.SENT, TWENTY_SECONDS_AGO, true))
+        viewModel.messages.add(
+            Message(
+                "Timestamp",
+                MessageType.TIMESTAMP,
+                TWENTY_SECONDS_AGO
+            )
+        )
+        viewModel.messages.add(
+            Message(
+                "message",
+                MessageType.SENT,
+                TWENTY_SECONDS_AGO,
+                true
+            )
+        )
 
-        viewModel.sendMessage("message", TEST_TIME)
+        viewModel.sendMessage("message",
+            TEST_TIME
+        )
 
         assertEquals(viewModel.messages.size, 3)
         assertFalse(viewModel.messages[1].hasTail)
@@ -97,10 +130,25 @@ class MainViewModelTest {
 
     @Test
     fun sendMessage_afterTailDelay() {
-        viewModel.messages.add(Message("Timestamp", MessageType.TIMESTAMP, TWENTY_ONE_SECONDS_AGO))
-        viewModel.messages.add(Message("message", MessageType.SENT, TWENTY_ONE_SECONDS_AGO, true))
+        viewModel.messages.add(
+            Message(
+                "Timestamp",
+                MessageType.TIMESTAMP,
+                TWENTY_ONE_SECONDS_AGO
+            )
+        )
+        viewModel.messages.add(
+            Message(
+                "message",
+                MessageType.SENT,
+                TWENTY_ONE_SECONDS_AGO,
+                true
+            )
+        )
 
-        viewModel.sendMessage("message", TEST_TIME)
+        viewModel.sendMessage("message",
+            TEST_TIME
+        )
 
         assertEquals(viewModel.messages.size, 3)
         assertTrue(viewModel.messages[1].hasTail)
@@ -109,20 +157,50 @@ class MainViewModelTest {
 
     @Test
     fun sendMessage_onTimestampDelay() {
-        viewModel.messages.add(Message("Timestamp", MessageType.TIMESTAMP, ONE_HOUR_AGO))
-        viewModel.messages.add(Message("message", MessageType.SENT, ONE_HOUR_AGO, true))
+        viewModel.messages.add(
+            Message(
+                "Timestamp",
+                MessageType.TIMESTAMP,
+                ONE_HOUR_AGO
+            )
+        )
+        viewModel.messages.add(
+            Message(
+                "message",
+                MessageType.SENT,
+                ONE_HOUR_AGO,
+                true
+            )
+        )
 
-        viewModel.sendMessage("message", TEST_TIME)
+        viewModel.sendMessage("message",
+            TEST_TIME
+        )
 
         assertEquals(viewModel.messages.size, 3)
     }
 
     @Test
     fun sendMessage_afterTimestampDelay() {
-        viewModel.messages.add(Message("Timestamp", MessageType.TIMESTAMP, OVER_ONE_HOUR_AGO))
-        viewModel.messages.add(Message("message", MessageType.SENT, OVER_ONE_HOUR_AGO, true))
+        viewModel.messages.add(
+            Message(
+                "Timestamp",
+                MessageType.TIMESTAMP,
+                OVER_ONE_HOUR_AGO
+            )
+        )
+        viewModel.messages.add(
+            Message(
+                "message",
+                MessageType.SENT,
+                OVER_ONE_HOUR_AGO,
+                true
+            )
+        )
 
-        viewModel.sendMessage("message", TEST_TIME)
+        viewModel.sendMessage("message",
+            TEST_TIME
+        )
 
         assertEquals(viewModel.messages.size, 4)
         assertTrue(viewModel.messages[1].hasTail)
@@ -133,10 +211,25 @@ class MainViewModelTest {
 
     @Test
     fun sendMessage_receiveResponse() {
-        viewModel.messages.add(Message("Timestamp", MessageType.TIMESTAMP, TWO_SECONDS_AGO))
-        viewModel.messages.add(Message("message", MessageType.SENT, TWO_SECONDS_AGO, true))
+        viewModel.messages.add(
+            Message(
+                "Timestamp",
+                MessageType.TIMESTAMP,
+                TWO_SECONDS_AGO
+            )
+        )
+        viewModel.messages.add(
+            Message(
+                "message",
+                MessageType.SENT,
+                TWO_SECONDS_AGO,
+                true
+            )
+        )
 
-        viewModel.sendMessage("hello", TEST_TIME)
+        viewModel.sendMessage("hello",
+            TEST_TIME
+        )
 
         assertEquals(viewModel.messages.size, 4)
         assertEquals(viewModel.messages.last().type, MessageType.RECEIVED)

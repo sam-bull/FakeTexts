@@ -1,10 +1,10 @@
-package com.example.muzmatch.faketexts
+package com.example.muzmatch.faketexts.adaptor
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.muzmatch.faketexts.model.Message
+import com.example.muzmatch.faketexts.model.MessageType
 import com.example.muzmatch.faketexts.databinding.*
 
 class MessagesAdaptor(
