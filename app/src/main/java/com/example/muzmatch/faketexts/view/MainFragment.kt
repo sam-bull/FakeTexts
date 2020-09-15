@@ -8,11 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.muzmatch.faketexts.FakeTextsApplication
 import com.example.muzmatch.faketexts.R
 import com.example.muzmatch.faketexts.adaptor.MessagesAdaptor
 import com.example.muzmatch.faketexts.databinding.FragmentMainBinding
 import com.example.muzmatch.faketexts.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
@@ -20,18 +22,21 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    @Inject
+    lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity?.application as FakeTextsApplication).component.inject(this)
         val binding: FragmentMainBinding =
-            DataBindingUtil.inflate(inflater,
-                R.layout.fragment_main, container, false)
+            DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_main, container, false
+            )
         binding.lifecycleOwner = this
-        viewModel = MainViewModel()
         binding.viewModel = viewModel
         return binding.root
     }
@@ -40,8 +45,7 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         messages_recycler_view.layoutManager = LinearLayoutManager(context)
-        messages_recycler_view.adapter =
-            MessagesAdaptor(viewModel.messages)
+        messages_recycler_view.adapter = MessagesAdaptor(viewModel.messages)
 
         viewModel.sendMessage.observe(viewLifecycleOwner, Observer { event ->
             event.getContentIfNotHandled()?.let {

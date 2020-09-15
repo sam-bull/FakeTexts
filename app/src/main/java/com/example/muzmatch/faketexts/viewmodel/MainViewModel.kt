@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.muzmatch.faketexts.model.Message
 import com.example.muzmatch.faketexts.model.MessageType
 import java.util.*
+import javax.inject.Singleton
 
+@Singleton
 class MainViewModel : ViewModel() {
 
     companion object {
