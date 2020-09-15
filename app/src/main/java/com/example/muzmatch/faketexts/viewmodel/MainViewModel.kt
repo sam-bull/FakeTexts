@@ -3,6 +3,7 @@ package com.example.muzmatch.faketexts.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.muzmatch.faketexts.extensions.toDayTimeString
 import com.example.muzmatch.faketexts.model.Message
 import com.example.muzmatch.faketexts.model.MessageType
 import java.util.*
@@ -29,7 +30,7 @@ class MainViewModel : ViewModel() {
         if (messages.isEmpty()) {
             messages.add(
                 Message(
-                    "Today, ${now.get(Calendar.HOUR_OF_DAY)}:${now.get(Calendar.MINUTE)}",
+                    now.toDayTimeString(),
                     MessageType.TIMESTAMP,
                     now
                 )
@@ -38,7 +39,7 @@ class MainViewModel : ViewModel() {
         if (now.timeInMillis - messages.last().timeSent.timeInMillis > SECTION_TIME) {
             messages.add(
                 Message(
-                    "Today, ${now.get(Calendar.HOUR_OF_DAY)}:${now.get(Calendar.MINUTE)}",
+                    now.toDayTimeString(),
                     MessageType.TIMESTAMP,
                     now
                 )
