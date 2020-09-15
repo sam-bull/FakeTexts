@@ -44,17 +44,19 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        messages_recycler_view.layoutManager = LinearLayoutManager(context)
+        messages_recycler_view.layoutManager = LinearLayoutManager(context).apply { stackFromEnd = true }
         messages_recycler_view.adapter = MessagesAdaptor(viewModel.messages)
 
         viewModel.sendMessage.observe(viewLifecycleOwner, Observer { event ->
             event.getContentIfNotHandled()?.let {
+                val lastIndex = viewModel.messages.lastIndex
                 viewModel.sendMessage(message_text.text.toString())
                 message_text.text.clear()
-                (messages_recycler_view.adapter as MessagesAdaptor).notifyDataSetChanged()
+                (messages_recycler_view.adapter as MessagesAdaptor).notifyItemInserted(viewModel.messages.lastIndex)
+                (messages_recycler_view.adapter as MessagesAdaptor).notifyItemChanged(lastIndex)
+                messages_recycler_view.scrollToPosition(viewModel.messages.lastIndex)
             }
         })
-
     }
 
 }
