@@ -61,6 +61,12 @@ class MainViewModel : ViewModel() {
             receiveMessage("I'm good", now)
             receiveMessage("you?", now)
         }
+        if (text.contains("ice cream")) {
+            receiveMessage("oooh what kind? I like the Aldi own brand 🍦", now)
+        }
+        if (text.contains("Ben & Jerrys")) {
+            receiveMessage("ewww 🤮 I can't stand their stuff", now)
+        }
     }
 
     private fun receiveMessage(text: String, now: Calendar) {

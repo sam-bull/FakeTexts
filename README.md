@@ -13,6 +13,8 @@ messages are displayed in a RecyclerView using 3 custom view holders; one for se
 received messages, and one for timestamps. There are unit tests for the ViewModel's logic around 
 message tails and timestamps, and for the Calendar class extension.
 
+This app supports Android v7.0 Nougat (API level 24) and above.
+
 ## Message tails
 Some messages have tails. A message has a tail when any of the following 3 criteria are met:
  * It is the most recent message in the conversation
@@ -36,13 +38,22 @@ are lost if the ViewModel is destroyed, e.g. when the app is closed. Despite nev
 before I experimented with Realm as a method of persisting the message data, however I couldn't get 
 it working within a reasonable amount of time.
 
+## Videos
+There are two videos in the root directory of the project that demo the app. The first, `demo_p1`, 
+shows sending messages, timestamps being shown for the start of the message thread, receiving them, 
+message tails being removed for relevant messages, existing messages being scrolled up when new 
+messages are added, and the text entry field expanding to fit multiple lines of text. The end of the 
+video shows a message tail being left on when more than 20 seconds has passed. The second, `demo_p2`,
+shows a message being sent after more than an hour has passed and a new timestamp is shown.
+
 ## Future development
 Some ideas to take this app even further include:
  * Have a delay on the incoming messages, to make them seem more realistic. This could be done with 
  a Handler, but care would have to be taken to avoid memory leaks.
  * Update the timestamp to be more dynamic and relative; show "Today" or "Tomorrow" for those 
  days, and add the date for timestamps that are over a week ago.
- * More/smarter responses; currently the app only replies to "hello" and "how's it going".
+ * More/smarter responses; currently the app only replies to "hello", "how's it going" and "ice 
+ cream".
  * More "people" to talk to; the app would launch onto a list of "contacts", and selecting one takes 
  the user to the chat history with that contact. The user can go back to the main list to "talk" to 
  a different contact and won't lose any chat history. 
